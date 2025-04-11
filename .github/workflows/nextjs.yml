@@ -46,12 +46,24 @@ jobs:
           static_site_generator: next
       - name: Install dependencies
         run: npm install --legacy-peer-deps
+      # Install SWC packages explicitly to avoid download issues
+      - name: Install SWC packages
+        run: |
+          npm install --no-save @next/swc-linux-x64-gnu @next/swc-linux-x64-musl --legacy-peer-deps
+          mkdir -p /home/runner/.cache/next-swc
       - name: Set environment variables
         run: |
           echo "NEXT_PUBLIC_BASE_PATH=/${GITHUB_REPOSITORY#*/}" >> .env.production
           cat .env.production
+      - name: Fix next.config.mjs devIndicators
+        run: |
+          sed -i 's/buildActivity: false/\/\/ buildActivity: false/g' next.config.mjs
+          sed -i 's/buildActivityPosition: .*/position: "bottom-right",/g' next.config.mjs
+          cat next.config.mjs
       - name: Build with Next.js
         run: npm run build
+        env:
+          NODE_OPTIONS: "--max_old_space_size=4096"
       - name: Ensure .nojekyll file exists
         run: touch out/.nojekyll
       - name: Upload artifact

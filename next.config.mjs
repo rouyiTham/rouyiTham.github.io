@@ -39,8 +39,7 @@ const nextConfig = {
     parallelServerCompiles: true,
   },
   devIndicators: {
-    buildActivity: false,
-    buildActivityPosition: 'bottom-right',
+    position: 'bottom-right',
   },
   // Disable automatic prefetching to avoid "Failed to fetch" errors
   onDemandEntries: {
