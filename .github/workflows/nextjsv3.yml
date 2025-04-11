@@ -40,7 +40,17 @@ jobs:
           static_site_generator: next
 
       - name: Build with Next.js
-        run: npm run build
+        run: |
+          # Build the Next.js application
+          npm run build
+          # Ensure public directory exists in output
+          if [ -d "public" ]; then
+            echo "Copying public directory contents to out directory..."
+            cp -r public/* out/
+          fi
+          # List contents of out directory for verification
+          echo "Contents of out directory:"
+          ls -la out/
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
