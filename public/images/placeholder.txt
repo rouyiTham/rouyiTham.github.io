@@ -1,0 +1,1 @@
+This directory will contain project images and logos for the portfolio website.
