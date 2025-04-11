@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     description: 'Computer Scientist & Developer specializing in algorithms and software solutions',
     images: [
       {
-        url: '/images/profile_pic.jpeg',
+        url: '/images/sitelogo.png',
         width: 800,
         height: 800,
         alt: 'Tham Rou Yi',
