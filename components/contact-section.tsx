@@ -11,6 +11,10 @@ export default function ContactSection() {
   const buttonsReveal = useRevealEffect(0.2, 500)
   const socialReveal = useRevealEffect(0.2, 700)
 
+  // Get the base path from environment variable or default to empty string
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
+  const cvUrl = `${basePath}/cv.pdf`
+
   return (
     <section className="py-8 md:py-12 text-center relative w-full" id="contact">
       {/* Background decorative elements */}
@@ -94,15 +98,17 @@ export default function ContactSection() {
             >
               <Linkedin className="h-5 w-5 text-[hsl(var(--primary))]" />
             </Link>
-            <Link
-              href="/cv.pdf"
+            <a
+              href={cvUrl}
               target="_blank"
+              rel="noopener noreferrer"
               className="bg-[hsl(var(--secondary))]/15 p-3 rounded-full hover:bg-[hsl(var(--secondary))]/25 transition-all duration-300 shadow-sm hover:shadow-md mobile-touch-target gradient-bg animate-gentle-float"
               style={{ animationDelay: '1s', animationDuration: '10s' }}
-              aria-label="Resume/CV"
+              aria-label="Download Resume/CV"
+              download="Rouyi_Tham_CV.pdf"
             >
               <ExternalLink className="h-5 w-5 text-[hsl(var(--primary))]" />
-            </Link>
+            </a>
           </div>
         </div>
       </div>

@@ -77,7 +77,7 @@ export default function Navbar() {
                 className="rounded-full text-xs h-8 border-[#e8e0d7] text-[#5c4f3c] hover:bg-[#f6f2ee] whitespace-nowrap hover:shadow-sm transition-all"
                 asChild
               >
-                <Link href="/CV">
+                <Link href="/cv.pdf">
                   <FileText className="h-3 w-3 mr-1" /> CV
                 </Link>
               </Button>
