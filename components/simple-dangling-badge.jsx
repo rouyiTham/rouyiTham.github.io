@@ -24,7 +24,7 @@ export default function SimpleDanglingBadge({ isHovered, badgeImage = '/images/p
   return (
     <div 
       ref={badgeRef}
-      className={`fixed z-50 transition-opacity duration-300 pointer-events-none
+      className={`fixed z-[100] transition-all duration-300 pointer-events-none
         ${isHovered ? 'opacity-100' : 'opacity-0'}`}
       style={{ 
         left: `${position?.left || 0}px`,
@@ -32,7 +32,8 @@ export default function SimpleDanglingBadge({ isHovered, badgeImage = '/images/p
         width: '150px',
         height: '210px',
         transformOrigin: 'top center',
-        animation: isHovered ? 'dropIn 0.3s ease-out forwards' : 'none'
+        animation: isHovered ? 'dropIn 0.3s ease-out forwards' : 'none',
+        willChange: 'transform, opacity'
       }}
     >
       {/* Lanyard */}
@@ -41,7 +42,9 @@ export default function SimpleDanglingBadge({ isHovered, badgeImage = '/images/p
         style={{
           height: '40px',
           animation: animationStarted ? 'swayRope 3s ease-in-out infinite' : 'none',
-          transformOrigin: 'top center'
+          transformOrigin: 'top center',
+          willChange: 'transform',
+          zIndex: 1
         }}
       />
       
@@ -53,7 +56,9 @@ export default function SimpleDanglingBadge({ isHovered, badgeImage = '/images/p
           height: '170px',
           backgroundColor: '#f8f4e3',
           animation: animationStarted ? 'swayBadge 3s ease-in-out infinite' : 'none',
-          transformOrigin: 'top center'
+          transformOrigin: 'top center',
+          willChange: 'transform',
+          zIndex: 2
         }}
       >
         <div className="relative w-full h-full">
@@ -63,6 +68,7 @@ export default function SimpleDanglingBadge({ isHovered, badgeImage = '/images/p
             fill
             style={{ objectFit: 'cover' }}
             priority
+            unoptimized
           />
         </div>
       </div>
