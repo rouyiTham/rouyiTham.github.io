@@ -20,9 +20,7 @@ const nextConfig = {
     ignoreBuildErrors: true,
   },
   output: 'export',  // Enable static exports
-  basePath: process.env.GITHUB_ACTIONS && process.env.GITHUB_REPOSITORY 
-    ? `/${process.env.GITHUB_REPOSITORY.split('/')[1]}` 
-    : '',
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
   images: {
     unoptimized: true,  // Required for static export
     remotePatterns: [

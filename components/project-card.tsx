@@ -1,12 +1,12 @@
 "use client"
 
-import Image from "next/image"
 import Link from "next/link"
 import { Github, ExternalLink, Code, Laptop, Database, FileCode, Braces, Sparkles } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useState } from "react"
 import { useParallax, useTiltEffect, useRevealEffect } from "./parallax-provider"
 import { DepthCard } from "./scroll-section"
+import BaseImage from "@/components/ui/base-image"
 
 interface ProjectCardProps {
   project: {
@@ -61,7 +61,7 @@ export default function ProjectCard({ project, index }: ProjectCardProps) {
         <div className="bg-white shadow-sm border border-[#e8e0d7] rounded-[24px] overflow-hidden transition-all duration-300 group-hover:shadow-md flex flex-col h-full">
           <div className="relative aspect-[16/9] w-full overflow-hidden">
         {!isPlaceholderImage ? (
-          <Image
+          <BaseImage
             src={project.image}
             alt={project.name}
             fill

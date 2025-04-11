@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { Github, ArrowRight } from "lucide-react"
@@ -11,6 +10,7 @@ import Link from "next/link"
 import { Typewriter } from "@/components/ui/typewriter"
 import { Sparkles } from "lucide-react"
 import { User, Mail, Phone, Award, Linkedin } from "lucide-react"
+import BaseImage from "@/components/ui/base-image"
 
 export default function Hero() {
   const [mounted, setMounted] = useState(false)
@@ -46,7 +46,7 @@ export default function Hero() {
         style={imageTilt.style as React.CSSProperties}
       >
         <div className="absolute inset-0 rounded-full bg-gradient-to-r from-[hsl(var(--secondary))/40] to-[hsl(var(--accent))/25] animate-pulse-soft"></div>
-        <Image
+        <BaseImage
           src="/images/profile_pic.jpeg"
           alt="Tham Rou Yi"
           width={144}

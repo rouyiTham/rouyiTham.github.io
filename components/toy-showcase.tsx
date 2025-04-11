@@ -2,10 +2,11 @@
 
 import React from "react"
 import { useState, useEffect } from "react"
-import Image from "next/image"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Lightbulb, Brain, Puzzle, Sparkles, Code, Users, Zap, Heart, Star, Coffee, PenTool, Smile, Award, ZoomIn, X, RotateCcw } from "lucide-react"
+import { cn } from "@/lib/utils"
+import BaseImage from "@/components/ui/base-image"
 
 export default function ToyShowcase() {
   const [isFlipped, setIsFlipped] = useState(false)
@@ -143,13 +144,13 @@ export default function ToyShowcase() {
               >
                 {/* Main toy image container with improved sizing */}
                 <div className="relative w-full h-full">
-              <Image
+              <BaseImage
                 src="/images/photo_design.jpeg"
                 alt="Computer Scientist Toy Design"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 500px"
-                    className="object-contain transition-transform duration-500"
-                    style={{ transform: isHovered ? 'scale(1.02)' : 'scale(1)' }}
+                fill
+                sizes="(max-width: 768px) 100vw, 500px"
+                className="object-contain transition-transform duration-500"
+                style={{ transform: isHovered ? 'scale(1.02)' : 'scale(1)' }}
                 priority
               />
                   
@@ -314,7 +315,7 @@ export default function ToyShowcase() {
         >
           <div className="relative max-w-4xl max-h-[90vh] w-full h-full" onClick={e => e.stopPropagation()}>
             <div className="w-full h-full relative rounded-lg overflow-hidden border-2 border-white/20 shadow-2xl">
-              <Image
+              <BaseImage
                 src="/images/photo_design.jpeg"
                 alt="Computer Scientist Toy Design (Full Size)"
                 fill
