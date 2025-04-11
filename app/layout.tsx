@@ -10,14 +10,14 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       {
-        url: '/images/profile_pic.jpeg',
-        type: 'image/jpeg',
+        url: '/images/sitelogo.png',
+        type: 'image/png',
       },
     ],
     apple: [
       {
-        url: '/images/profile_pic.jpeg',
-        type: 'image/jpeg',
+        url: '/images/sitelogo.png',
+        type: 'image/png',
       },
     ],
   },
