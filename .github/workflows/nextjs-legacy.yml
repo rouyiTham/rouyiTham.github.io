@@ -1,0 +1,107 @@
+name: Deploy Next.js with Legacy Peer Dependencies
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+  # Allows manual triggering
+  workflow_dispatch:
+
+# Permissions required for GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Prevent concurrent deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: 'npm'
+
+      - name: Clean install dependencies with legacy peer deps
+        run: |
+          # Remove existing node_modules and lock file
+          echo "Cleaning existing dependencies..."
+          rm -rf node_modules
+          rm -f package-lock.json
+          
+          # Install dependencies with legacy peer deps
+          echo "Installing dependencies with legacy peer deps..."
+          npm install --legacy-peer-deps --no-audit
+          
+          # Log installed versions for debugging
+          echo "Node version: $(node -v)"
+          echo "NPM version: $(npm -v)"
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
+        with:
+          static_site_generator: next
+
+      - name: Restore Next.js build cache
+        uses: actions/cache@v4
+        with:
+          path: |
+            .next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/package-lock.json') }}-
+
+      - name: Build Next.js application
+        run: |
+          echo "Starting Next.js build..."
+          npm run build
+          
+          # Verify out directory exists
+          if [ ! -d "out" ]; then
+            echo "Error: 'out' directory not found after build"
+            exit 1
+          fi
+
+      - name: Process static assets
+        run: |
+          echo "Processing static assets..."
+          
+          # Ensure public directory exists and copy its contents
+          if [ -d "public" ]; then
+            echo "Copying public directory contents to out directory..."
+            cp -r public/* out/
+            
+            # Verify images directory
+            if [ -d "public/images" ]; then
+              echo "Verifying images directory contents:"
+              ls -la out/images/
+            fi
+          fi
+          
+          echo "Final out directory contents:"
+          ls -la out/
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./out
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 
