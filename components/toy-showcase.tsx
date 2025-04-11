@@ -145,7 +145,7 @@ export default function ToyShowcase() {
                 {/* Main toy image container with improved sizing */}
                 <div className="relative w-full h-full">
               <BaseImage
-                src="/images/photo_design.jpeg"
+                src="/images/photo_design.png"
                 alt="Computer Scientist Toy Design"
                 fill
                 sizes="(max-width: 768px) 100vw, 500px"
@@ -316,7 +316,7 @@ export default function ToyShowcase() {
           <div className="relative max-w-4xl max-h-[90vh] w-full h-full" onClick={e => e.stopPropagation()}>
             <div className="w-full h-full relative rounded-lg overflow-hidden border-2 border-white/20 shadow-2xl">
               <BaseImage
-                src="/images/photo_design.jpeg"
+                src="/images/photo_design.png"
                 alt="Computer Scientist Toy Design (Full Size)"
                 fill
                 sizes="(max-width: 768px) 100vw, 80vw"
